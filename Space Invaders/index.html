@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="on">
+	<head>
+		<meta charset = "UTF-8">
+		<title>Space Invaders</title>
+
+		<script src="javascript/helpers.js"></script>
+
+		<style>
+		canvas {
+			background-color: #000;
+			display: block;
+			position: absolute;
+			margin: auto;
+			top: 0;
+			bottom: 0;
+			left: 0;
+			right: 0;
+		}
+		</style>
+	</head>
+	<body>
+
+		<header>
+			<h1>Space Invaders</h1>
+			<h2>By Jonathan Li and Emily Wong</h2>
+			<h2>Let the Space Drop</h2>
+		</header>
+		<script>
+
+			var screen;
+			var input;
+			var frames;
+			var alSprite;
+			var taSprite;
+			var aliens;
+			var dir;
+			var tank;
+			var bullets;
+			var cities;
+			var alX;
+			var alSpeed;
+
+			function main() {
+				screen = new Screen(510, 600);
+				input = new InputHandeler();
+
+				var imgInvad = new Image();
+				imgInvad.addEventListener("load", function() {
+					alSprite = new Sprite(this, 0, 0, 30, 30);
+
+					init();
+					run();
+
+				});
+				imgInvad.src = "res/space_invader.jpg"
+
+				var imgTank = new Image();
+				imgTank.addEventListener("load", function() {
+					taSprite = new Sprite(this, 0, 0, 66, 30);
+
+					init();
+					run();
+
+				});
+				imgTank.src = "res/tankpic.jpg"
+			};
+
+			function init() {
+				frames = 0;
+
+				aliens = 0;
+				var rows = [1, 0, 0, 2, 2];
+				for (var i = 0; i < rows.length; i++) {
+					/*for (var j = 0; j < 10; j++) {
+						var a = rows[i];
+						aliens.push({
+							sprite: alSprite, 
+							x: 30 + j*30,
+							y: 30 + i*30,
+							w: alSprite.w,
+							h: alSprite.h
+							//ended here at 17:52  25:30
+						});
+					}*/
+				}
+			};
+
+			function run() {
+				var loop = function() {
+					update();
+					render();
+					alFall();
+
+					window.requestAnimationFrame(loop, screen.canvas);
+
+				};
+				window.requestAnimationFrame(loop, screen.canvas);
+
+			};
+
+			function update() {
+				/*frames++;
+				if (frames % lvFrame === 0) {
+					spFrame = (spFrame + 1) % 2;
+
+					var _max = 0; 
+					var _min = screen.width;
+					
+				}*/
+			};
+
+			function render() {
+				screen.drawSprite(alSprite, 0, 0);
+				screen.drawSprite(taSprite, 250, 550);
+				/*for (var i = 0; i < aliens.length; i++) {
+					var a = aliens[i];
+					screen.drawSprite(a.sprite, a.x, a.y);
+				}*/
+			};
+
+			function alFall() {
+				aliens = 1;
+				for (var i = 0; i < aliens; i++) {
+					alX = Math.floor(Math.random() * 500);
+					screen.drawSprite(alSprite, alX, 0);
+					alSpeed = Math.floor((Math.random() * 5) + 1);
+					//move it down at speed
+				}
+
+			};
+
+			main();
+		</script>
+	</body>
+</html>
