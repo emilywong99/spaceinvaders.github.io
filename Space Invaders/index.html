@@ -68,6 +68,15 @@
 
 			function init() {
 				frames = 0;
+				spFrame = 0;
+				lvFrame = 20;
+				dir = 1;
+
+				tank = {
+					sprite: taSprite,
+					x: (screen.width = taSprite.w)/2,
+					y: screen.height - (30 + taSprite.h)
+				};
 
 				aliens = 0;
 				var rows = [1, 0, 0, 2, 2];
@@ -100,6 +109,14 @@
 			};
 
 			function update() {
+				if(input.isDown(37)){
+					tank.x -= 4;
+				}
+
+				if (input.isDown(39)){
+					tank.x += 4;
+				}
+
 				/*frames++;
 				if (frames % lvFrame === 0) {
 					spFrame = (spFrame + 1) % 2;
@@ -112,11 +129,11 @@
 
 			function render() {
 				screen.drawSprite(alSprite, 0, 0);
-				screen.drawSprite(taSprite, 250, 550);
 				/*for (var i = 0; i < aliens.length; i++) {
 					var a = aliens[i];
 					screen.drawSprite(a.sprite, a.x, a.y);
 				}*/
+				screen.drawSprite(tank.sprite, tank.x, tank.y);
 			};
 
 			function alFall() {
