@@ -38,7 +38,6 @@
 			var tank;
 			var bullets;
 			var cities;
-			var alX;
 			var alSpeed;
 
 			function main() {
@@ -78,9 +77,11 @@
 					y: screen.height - (30 + taSprite.h)
 				}; 
 
+				bullets = [];
+
 				alien = {
 					sprite: alSprite,
-					x: Math.floor(Math.random() * 500),
+					x: Math.floor((Math.random() * 440) + 30),
 					y: alSprite.y
 				}
 
@@ -124,6 +125,24 @@
 				}
 
 				tank.x = Math.max(Math.min(tank.x, screen.width - (taSprite.w)), 0);
+
+				if(input.isPressed(32)) {
+					bullets.push(new Bullet(tank.x + 10, tank.y, -8, 2, 6, white));
+				}
+				for(var i = 0, len = bullets.length; i < len; i++) {
+					var b = bullets[i];
+					b.update();
+
+					/*if (b.y + b.height < 0 || b.y > screen.height) {
+						bullets.splice(i, 1);
+						i--;
+						len--;
+						continue;
+
+						// 8:24
+					}*/
+				}
+
 				/*frames++;
 				if (frames % lvFrame === 0) {
 					spFrame = (spFrame + 1) % 2;
@@ -135,22 +154,28 @@
 			};
 
 			function render() {
-				screen.drawSprite(alSprite, 0, 0);
+				screen.drawSprite(alien.sprite, alien.x, alien.y);
+				alFall();
 				/*for (var i = 0; i < aliens.length; i++) {
 					var a = aliens[i];
 					screen.drawSprite(a.sprite, a.x, a.y);
 				}*/
 				screen.drawSprite(tank.sprite, tank.x, tank.y);
+				screen.ctx.save();
+				for(var i = 0, len = bullets.length; i < len; i++) {
+					screen.drawBullet(bullets[i]);
+				}
+				screen.ctx.restore;
+
 			};
 
 			function alFall() {
-				aliens = 1;
-				for (var i = 0; i < aliens; i++) {
-					alX = Math.floor(Math.random() * 500);
-					screen.drawSprite(alSprite, alX, 0);
-					alSpeed = Math.floor((Math.random() * 5) + 1);
-					//alY = alY + alSpeed;
-					//move it down at speed
+				alSpeed = Math.floor((Math.random() * 3) + 1);
+				alien.y += alSpeed;
+				if(alien.y > screen.height) {
+					alien.y = 0;
+					alien.x = Math.floor((Math.random() * 440) + 30);
+					alSpeed = Math.floor((Math.random() * 3) + 1);
 				}
 
 			};

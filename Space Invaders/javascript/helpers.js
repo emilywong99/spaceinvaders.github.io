@@ -1,6 +1,16 @@
 
 //Helper functions
 
+//Bullet
+function Bullet(x, y, vely, w, h, color){
+	this.x = x;
+	this.y = y;
+	this.vely = vely;
+	this.width = w;
+	this.height = h;
+	this.color = color;
+};
+
 //Screen
 function Screen(width, height) {
 	this.canvas = document.createElement("canvas");
