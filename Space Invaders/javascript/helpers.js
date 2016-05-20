@@ -24,6 +24,7 @@ function Sprite(img, x, y, w, h){
 	this.y = y;
 	this.w = w;
 	this.h = h;
+
 };
 
 // InputHandeler

@@ -74,9 +74,15 @@
 
 				tank = {
 					sprite: taSprite,
-					x: (screen.width - taSprite.w)/2,
+					x: (screen.width - taSprite.w) / 2,
 					y: screen.height - (30 + taSprite.h)
-				};
+				}; 
+
+				alien = {
+					sprite: alSprite,
+					x: Math.floor(Math.random() * 500),
+					y: alSprite.y
+				}
 
 				aliens = 0;
 				var rows = [1, 0, 0, 2, 2];
@@ -99,7 +105,7 @@
 				var loop = function() {
 					update();
 					render();
-					alFall();
+					//alFall();
 
 					window.requestAnimationFrame(loop, screen.canvas);
 
@@ -116,8 +122,8 @@
 				if (input.isDown(39)){
 					tank.x += 4;
 				}
-				tank.x = Math.max(Math.min(tank.x, screen.width - (30 + taSprite.w)), 30);
 
+				tank.x = Math.max(Math.min(tank.x, screen.width - (taSprite.w)), 0);
 				/*frames++;
 				if (frames % lvFrame === 0) {
 					spFrame = (spFrame + 1) % 2;
@@ -143,6 +149,7 @@
 					alX = Math.floor(Math.random() * 500);
 					screen.drawSprite(alSprite, alX, 0);
 					alSpeed = Math.floor((Math.random() * 5) + 1);
+					//alY = alY + alSpeed;
 					//move it down at speed
 				}
 
