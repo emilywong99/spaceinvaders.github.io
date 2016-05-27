@@ -106,7 +106,6 @@
 				var loop = function() {
 					update();
 					render();
-					//alFall();
 
 					window.requestAnimationFrame(loop, screen.canvas);
 
@@ -142,25 +141,21 @@
 						// 8:24
 					}*/
 				}
-
-				/*frames++;
-				if (frames % lvFrame === 0) {
-					spFrame = (spFrame + 1) % 2;
-
-					var _max = 0; 
-					var _min = screen.width;
-					
-				}*/
 			};
 
 			function render() {
 				screen.drawSprite(alien.sprite, alien.x, alien.y);
 				alFall();
+<<<<<<< HEAD
 				/*for (var i = 0; i < aliens.length; i++) {
 					var a = aliens[i];
 					screen.drawSprite(a.sprite, a.x, a.y);
 				}*/
 				screen.drawSprite(tank.sprite, tank.x, tank.y);
+=======
+				
+
+>>>>>>> origin/master
 				screen.ctx.save();
 				for(var i = 0, len = bullets.length; i < len; i++) {
 					screen.drawBullet(bullets[i]);
@@ -175,7 +170,7 @@
 				if(alien.y > screen.height) {
 					alien.y = 0;
 					alien.x = Math.floor((Math.random() * 440) + 30);
-					alSpeed = Math.floor((Math.random() * 3) + 1);
+					alSpeed = Math.floor((Math.random() * 8) + 1);
 				}
 
 			};
