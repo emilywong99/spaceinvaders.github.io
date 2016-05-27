@@ -37,16 +37,8 @@
 			var dir;
 			var tank;
 			var bullets;
-<<<<<<< HEAD
 			var cities;
-=======
-			var bulletss;
->>>>>>> origin/master
 			var alSpeed;
-			var blackSprite;
-			var blacky;
-			var points = 0;
-			document.write("Currently tracking points...");
 
 			function main() {
 				screen = new Screen(510, 600);
@@ -71,7 +63,6 @@
 
 				});
 				imgTank.src = "res/tankpic.jpg"
-
 			};
 
 			function init() {
@@ -87,11 +78,6 @@
 				}; 
 
 				bullets = [];
-<<<<<<< HEAD
-=======
-				bulletss = [];
-				blacky = [];
->>>>>>> origin/master
 
 				alien = {
 					sprite: alSprite,
@@ -99,7 +85,6 @@
 					y: alSprite.y
 				}
 
-<<<<<<< HEAD
 				aliens = 0;
 				var rows = [1, 0, 0, 2, 2];
 				for (var i = 0; i < rows.length; i++) {
@@ -115,9 +100,6 @@
 						});
 					}*/
 				}
-=======
-
->>>>>>> origin/master
 			};
 
 			function run() {
@@ -142,13 +124,6 @@
 					tank.x += 4;
 				}
 
-				if (alien.y + 30 > 600) {
-					window.alert("An alien escaped! GAME OVER");
-					document.write("Points: " + points);
-					imgTank.src = "res/black.jpg";
-				}
-
-
 				tank.x = Math.max(Math.min(tank.x, screen.width - (taSprite.w)), 0);
 
 				if(input.isPressed(32)) {
@@ -156,11 +131,6 @@
 				}
 				for(var i = 0, len = bullets.length; i < len; i++) {
 					var b = bullets[i];
-<<<<<<< HEAD
-=======
-					var c = bulletss[i];
-
->>>>>>> origin/master
 					b.update();
 
 					/*if (b.y + b.height < 0 || b.y > screen.height) {
@@ -168,23 +138,9 @@
 						i--;
 						len--;
 						continue;
-					}
-				}
 
-<<<<<<< HEAD
 						// 8:24
 					}*/
-=======
-				for(var i = 0, len = bullets.length; i < len; i++) {
-					var b = bullets[i];
-					if(intersect (alien.x, alien.y, 30, 30, b.x, b.y, 2, 6)) {
-						blacky.splice(0, 1, new Bullet(alien.x, alien.y, 0, 30, 30, "#000"));
-						screen.drawBullet(blacky[0]);
-						points = points + 1;
-						alien.y = 0;
-						alien.x = Math.floor((Math.random() * 440) + 30);
-					}
->>>>>>> origin/master
 				}
 
 				/*frames++;
@@ -223,9 +179,8 @@
 				}
 
 			};
+
 			main();
 		</script>
-
-		
 	</body>
 </html>
