@@ -38,8 +38,11 @@
 			var tank;
 			var bullets;
 			var bulletss;
-			var cities;
 			var alSpeed;
+			var blackSprite;
+			var blacky;
+			var points = 0;
+			document.write("Currently tracking points...");
 
 			function main() {
 				screen = new Screen(510, 600);
@@ -64,6 +67,7 @@
 
 				});
 				imgTank.src = "res/tankpic.jpg"
+
 			};
 
 
@@ -81,12 +85,14 @@
 
 				bullets = [];
 				bulletss = [];
+				blacky = [];
 
 				alien = {
 					sprite: alSprite,
 					x: Math.floor((Math.random() * 440) + 30),
 					y: alSprite.y
 				}
+
 
 			};
 
@@ -112,6 +118,13 @@
 					tank.x += 4;
 				}
 
+				if (alien.y + 30 > 600) {
+					window.alert("An alien escaped! GAME OVER");
+					document.write("Points: " + points);
+					imgTank.src = "res/black.jpg";
+				}
+
+
 				tank.x = Math.max(Math.min(tank.x, screen.width - (taSprite.w)), 0);
 
 				if(input.isPressed(32)) {
@@ -123,7 +136,6 @@
 					var b = bullets[i];
 					var c = bulletss[i];
 
-
 					b.update();
 					c.update();
 
@@ -133,8 +145,17 @@
 						i--;
 						len--;
 						continue;
+					}
+				}
 
-						// 8:24
+				for(var i = 0, len = bullets.length; i < len; i++) {
+					var b = bullets[i];
+					if(intersect (alien.x, alien.y, 30, 30, b.x, b.y, 2, 6)) {
+						blacky.splice(0, 1, new Bullet(alien.x, alien.y, 0, 30, 30, "#000"));
+						screen.drawBullet(blacky[0]);
+						points = points + 1;
+						alien.y = 0;
+						alien.x = Math.floor((Math.random() * 440) + 30);
 					}
 				}
 
@@ -176,8 +197,9 @@
 				}
 
 			};
-
 			main();
 		</script>
+
+		
 	</body>
 </html>
