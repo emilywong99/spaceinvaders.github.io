@@ -37,7 +37,6 @@
 			var dir;
 			var tank;
 			var bullets;
-			var bulletss;
 			var cities;
 			var alSpeed;
 
@@ -66,7 +65,6 @@
 				imgTank.src = "res/tankpic.jpg"
 			};
 
-
 			function init() {
 				frames = 0;
 				spFrame = 0;
@@ -80,7 +78,6 @@
 				}; 
 
 				bullets = [];
-				bulletss = [];
 
 				alien = {
 					sprite: alSprite,
@@ -88,6 +85,21 @@
 					y: alSprite.y
 				}
 
+				aliens = 0;
+				var rows = [1, 0, 0, 2, 2];
+				for (var i = 0; i < rows.length; i++) {
+					/*for (var j = 0; j < 10; j++) {
+						var a = rows[i];
+						aliens.push({
+							sprite: alSprite, 
+							x: 30 + j*30,
+							y: 30 + i*30,
+							w: alSprite.w,
+							h: alSprite.h
+							//ended here at 17:52  25:30
+						});
+					}*/
+				}
 			};
 
 			function run() {
@@ -115,27 +127,20 @@
 				tank.x = Math.max(Math.min(tank.x, screen.width - (taSprite.w)), 0);
 
 				if(input.isPressed(32)) {
-					bullets.push(new Bullet(tank.x + 31, tank.y, -8, 2, 6, "#fff"));
-					bulletss.push(new Bullet(tank.x + 31, tank.y + 8, -8, 2, 6, "#000"));
-					
+					bullets.push(new Bullet(tank.x + 10, tank.y, -8, 2, 6, white));
 				}
 				for(var i = 0, len = bullets.length; i < len; i++) {
 					var b = bullets[i];
-					var c = bulletss[i];
-
-
 					b.update();
-					c.update();
 
-					if (b.y + b.height < 0 || b.y > screen.height) {
+					/*if (b.y + b.height < 0 || b.y > screen.height) {
 						bullets.splice(i, 1);
-						bulletss.splice(i, 1);
 						i--;
 						len--;
 						continue;
 
 						// 8:24
-					}
+					}*/
 				}
 
 				/*frames++;
@@ -155,14 +160,12 @@
 					var a = aliens[i];
 					screen.drawSprite(a.sprite, a.x, a.y);
 				}*/
-
+				screen.drawSprite(tank.sprite, tank.x, tank.y);
 				screen.ctx.save();
-				for(var i = 0; i < bullets.length; i++) {
+				for(var i = 0, len = bullets.length; i < len; i++) {
 					screen.drawBullet(bullets[i]);
-					screen.drawBullet(bulletss[i]);
 				}
 				screen.ctx.restore;
-				screen.drawSprite(tank.sprite, tank.x, tank.y);
 
 			};
 
